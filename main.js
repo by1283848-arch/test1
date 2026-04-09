@@ -53,6 +53,3 @@ function displayLottoSets() {
 }
 
 generateBtn.addEventListener('click', displayLottoSets);
-
-// Initial generation
-displayLottoSets();
