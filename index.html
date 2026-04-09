@@ -3,28 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>프리미엄 로또 생성기</title>
+  <title>프리미엄 로또 번호 생성기 | 행운과 통계의 만남</title>
+  <meta name="description" content="고급 알고리즘을 활용한 로또 번호 생성기입니다. 최신 로또 통계 정보와 분석 가이드를 확인해 보세요.">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8027110651673312"
      crossorigin="anonymous"></script>
   <link href='/style.css' rel='stylesheet'>
 </head>
 <body>
-  <div class="header">
-    <button id="theme-toggle">다크 모드</button>
-  </div>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">Premium Lotto</a>
+      <div class="nav-links">
+        <a href="#lotto">생성기</a>
+        <a href="#guide">가이드</a>
+        <a href="#contact">제휴</a>
+        <button id="theme-toggle">다크 모드</button>
+      </div>
+    </div>
+  </nav>
   
   <div class="container">
-    <section class="glass-card lotto-section">
-      <h1>Premium Lotto</h1>
+    <!-- 메인 생성기 섹션 -->
+    <section id="lotto" class="glass-card lotto-section">
+      <h1>Premium Lotto Generator</h1>
+      <p class="section-desc">무작위 추출을 넘어선 행운의 조합, 지금 바로 확인하세요.</p>
       <div id="lotto-container">
-        <!-- 로또 번호 세트가 여기에 생성됩니다 -->
+        <!-- 로또 번호 세트 생성 영역 -->
       </div>
       <button id="generate-lotto" class="main-button">행운의 번호 생성하기</button>
     </section>
 
-    <!-- AdSense Space (Auto Ads will use the script in head, but adding a placeholder if needed) -->
+    <!-- 고품질 정보성 콘텐츠 섹션 -->
+    <section id="guide" class="glass-card info-section">
+      <h2>로또 번호 선택 가이드</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <h3>통계의 중요성</h3>
+          <p>로또는 확률의 게임입니다. 자주 나오는 번호와 드물게 나오는 번호의 균형을 맞추는 것이 핵심 전략 중 하나입니다.</p>
+        </div>
+        <div class="info-item">
+          <h3>책임감 있는 게임</h3>
+          <p>로또는 재미로 즐기는 것이 중요합니다. 예산 내에서 소액으로 즐기는 건전한 문화를 권장합니다.</p>
+        </div>
+      </div>
+    </section>
 
-    <section class="glass-card contact-section">
+    <!-- FAQ 섹션 -->
+    <section class="glass-card faq-section">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+      <div class="faq-list">
+        <details>
+          <summary>이 생성기는 어떤 원리로 작동하나요?</summary>
+          <p>JavaScript의 강력한 무작위 추출 알고리즘을 사용하여 1부터 45까지의 번호를 중복 없이 공정하게 생성합니다.</p>
+        </details>
+        <details>
+          <summary>생성된 번호의 당첨 확률은 어떻게 되나요?</summary>
+          <p>모든 번호의 추출 확률은 동일하며, 본 서비스는 번호를 추천할 뿐 당첨을 보장하지는 않습니다.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 제휴 문의 섹션 -->
+    <section id="contact" class="glass-card contact-section">
       <h2>비즈니스 제휴 문의</h2>
       <form action="https://formspree.io/f/maqlzlbq" method="POST" class="contact-form">
         <div class="form-group">
@@ -39,20 +79,31 @@
       </form>
     </section>
 
+    <!-- 댓글 섹션 -->
     <section class="glass-card comment-section">
-      <h2>댓글</h2>
+      <h2>방문자 소통</h2>
       <div id="disqus_thread"></div>
       <script>
-          (function() { // DON'T EDIT BELOW THIS LINE
+          (function() {
           var d = document, s = d.createElement('script');
           s.src = 'https://test1-nonjr1gdxg.disqus.com/embed.js';
           s.setAttribute('data-timestamp', +new Date());
           (d.head || d.body).appendChild(s);
           })();
       </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </section>
   </div>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <p>&copy; 2024 Premium Lotto. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="#contact">고객센터</a>
+      </div>
+    </div>
+  </footer>
 
   <script defer type="text/javascript" src="/main.js"></script>
 </body>
