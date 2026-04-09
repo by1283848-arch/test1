@@ -258,13 +258,19 @@ input, textarea {
 }
 
 .submit-button {
-  background: var(--text-main);
-  color: var(--bg-gradient);
+  background: var(--accent);
+  color: #ffffff;
   border: none;
   padding: 1rem;
   border-radius: 12px;
   font-weight: 700;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
 }
 
 /* Footer */
