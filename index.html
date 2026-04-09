@@ -3,117 +3,101 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>프리미엄 로얄 룰렛 | Premium Royale Roulette</title>
-  <meta name="description" content="최고급 디자인의 프리미엄 숫지 추첨 서비스. 럭셔리한 환경에서 당신의 행운을 시험해 보세요.">
+  <title>Lucky Roulette Dashboard</title>
+  <meta name="description" content="현대적인 대시보드 스타일의 랜덤 숫자 룰렛">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8027110651673312"
      crossorigin="anonymous"></script>
   <link href='/style.css' rel='stylesheet'>
+  <!-- Lucide Icons for modern icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="#" class="nav-logo">Royale Roulette</a>
-      <div class="nav-links">
-        <a href="#roulette">PLAY</a>
-        <a href="#guide">GUIDE</a>
-        <a href="#contact">PARTNER</a>
-        <button id="theme-toggle">다크 모드</button>
+  <div class="bento-container">
+    <!-- Header Card -->
+    <header class="card bento-header">
+      <div class="logo">Lucky Roulette</div>
+      <button id="theme-toggle" class="icon-btn"><i data-lucide="sun"></i></button>
+    </header>
+
+    <!-- Main Roulette Card -->
+    <main class="card bento-main">
+      <div class="card-content">
+        <i data-lucide="refresh-cw" class="accent-icon"></i>
+        <h1>오늘의 숫자</h1>
+        <div class="roulette-display">
+          <span id="result-number">?</span>
+        </div>
+        <button id="spin-btn" class="primary-btn">추첨하기</button>
       </div>
-    </div>
-  </nav>
-  
-  <div class="container">
-    <!-- 메인 룰렛 섹션 -->
-    <section id="roulette" class="glass-card roulette-section">
-      <h1>Lucky Royale</h1>
-      <p class="section-desc">Experience the ultimate random draw.</p>
-      
-      <div class="input-container">
-        <label for="max-number">Select Range (Max 100)</label>
+    </main>
+
+    <!-- Range Setting Card -->
+    <section class="card bento-range">
+      <div class="card-label"><i data-lucide="settings-2"></i> 범위 설정</div>
+      <div class="range-input-wrapper">
+        <span class="range-hint">1 ~</span>
         <input type="number" id="max-number" min="1" max="100" value="100">
       </div>
-
-      <div class="roulette-wrapper">
-        <div class="roulette-display">
-          <div id="result-number">?</div>
-        </div>
-      </div>
-      
-      <button id="spin-btn" class="main-button">Spin the Wheel</button>
     </section>
 
-    <!-- 정보성 콘텐츠 섹션 -->
-    <section id="guide" class="glass-card info-section">
-      <h2>Premium Experience</h2>
-      <div class="info-grid">
-        <div class="info-item">
-          <h3>Unbiased Fairness</h3>
-          <p>우리의 프리미엄 알고리즘은 모든 사용자에게 공평하고 투명한 무작위 결과를 제공합니다. 모든 숫자는 동일한 확률을 가집니다.</p>
-        </div>
-        <div class="info-item">
-          <h3>Elite Interface</h3>
-          <p>사용자의 감각을 자극하는 고품질 비주얼과 매끄러운 애니메이션으로 차별화된 추첨 경험을 선사합니다.</p>
-        </div>
-      </div>
+    <!-- Feature 1: Fairness -->
+    <section class="card bento-feature-1">
+      <i data-lucide="shield-check" class="feature-icon"></i>
+      <h3>공정한 추출</h3>
+      <p>난수 알고리즘 적용</p>
     </section>
 
-    <!-- FAQ 섹션 -->
-    <section class="glass-card faq-section">
-      <h2>Common Inquiries</h2>
-      <div class="faq-list">
+    <!-- Feature 2: Speed -->
+    <section class="card bento-feature-2">
+      <i data-lucide="zap" class="feature-icon"></i>
+      <h3>빠른 결과</h3>
+      <p>즉시 확인 가능</p>
+    </section>
+
+    <!-- FAQ/Guide Card -->
+    <section class="card bento-guide">
+      <div class="card-label"><i data-lucide="help-circle"></i> 가이드</div>
+      <div class="faq-mini">
         <details>
-          <summary>숫자 범위의 한계는 어떻게 되나요?</summary>
-          <p>현재 프리미엄 서비스는 최적의 시각적 효과를 위해 1부터 100까지의 범위를 지원하고 있습니다.</p>
+          <summary>최대 범위는?</summary>
+          <p>현재 100까지 지원합니다.</p>
         </details>
         <details>
-          <summary>모바일 기기에서도 최적화되어 있나요?</summary>
-          <p>네, 모든 기기에서 동일한 럭셔리한 경험을 하실 수 있도록 완전한 반응형 디자인을 적용했습니다.</p>
+          <summary>조작이 없나요?</summary>
+          <p>공개된 알고리즘을 사용합니다.</p>
         </details>
       </div>
     </section>
 
-    <!-- 제휴 문의 섹션 -->
-    <section id="contact" class="glass-card contact-section">
-      <h2>Business Partnerships</h2>
-      <form action="https://formspree.io/f/maqlzlbq" method="POST" class="contact-form">
-        <div class="form-group">
-          <label for="email">Corporate Email</label>
-          <input type="email" name="email" id="email" required placeholder="example@corporate.com">
-        </div>
-        <div class="form-group">
-          <label for="message">Proposals</label>
-          <textarea name="message" id="message" required placeholder="비즈니스 제안 내용을 입력해 주세요..."></textarea>
-        </div>
-        <button type="submit" class="submit-button">Submit Proposal</button>
+    <!-- Partnership Card -->
+    <section class="card bento-contact">
+      <div class="card-label"><i data-lucide="mail"></i> 제휴 문의</div>
+      <form action="https://formspree.io/f/maqlzlbq" method="POST" class="mini-form">
+        <input type="email" name="email" required placeholder="이메일">
+        <button type="submit">제출</button>
       </form>
     </section>
 
-    <!-- 댓글 섹션 -->
-    <section class="glass-card comment-section">
-      <h2>Guestbook</h2>
+    <!-- Disqus Card (Wide) -->
+    <section class="card bento-comments">
+      <div class="card-label"><i data-lucide="message-square"></i> 소통 공간</div>
       <div id="disqus_thread"></div>
-      <script>
-          (function() {
-          var d = document, s = d.createElement('script');
-          s.src = 'https://test1-nonjr1gdxg.disqus.com/embed.js';
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
-          })();
-      </script>
     </section>
   </div>
 
-  <footer class="footer">
-    <div class="footer-container">
-      <p>&copy; 2024 Premium Royale Roulette. Elegance in Randomness.</p>
-      <div class="footer-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#contact">Contact Support</a>
-      </div>
-    </div>
-  </footer>
-
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
   <script defer type="text/javascript" src="/main.js"></script>
+  <!-- Disqus Script -->
+  <script>
+    (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://test1-nonjr1gdxg.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+  </script>
 </body>
 </html>
