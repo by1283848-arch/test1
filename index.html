@@ -3,94 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lucky Roulette Dashboard</title>
-  <meta name="description" content="현대적인 대시보드 스타일의 랜덤 숫자 룰렛">
+  <title>선물의 주인공 | 랜덤 숫자 추첨</title>
+  <meta name="description" content="현대적인 대시보드 스타일의 랜덤 숫자 추첨기, 선물의 주인공을 찾아보세요.">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8027110651673312"
      crossorigin="anonymous"></script>
   <link href='/style.css' rel='stylesheet'>
-  <!-- Lucide Icons for modern icons -->
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <div class="bento-container">
     <!-- Header Card -->
     <header class="card bento-header">
-      <div class="logo">Lucky Roulette</div>
+      <div class="logo">선물의 주인공</div>
       <button id="theme-toggle" class="icon-btn"><i data-lucide="sun"></i></button>
     </header>
 
     <!-- Main Roulette Card -->
     <main class="card bento-main">
       <div class="card-content">
-        <i data-lucide="refresh-cw" class="accent-icon"></i>
-        <h1>오늘의 숫자</h1>
+        <i data-lucide="gift" class="accent-icon"></i>
+        <h1>행운의 주인공</h1>
         <div class="roulette-display">
           <span id="result-number">?</span>
         </div>
-        <button id="spin-btn" class="primary-btn">추첨하기</button>
+        <button id="spin-btn" class="primary-btn">주인공 찾기</button>
       </div>
     </main>
 
     <!-- Range Setting Card -->
     <section class="card bento-range">
-      <div class="card-label"><i data-lucide="settings-2"></i> 범위 설정</div>
+      <div class="card-label"><i data-lucide="users"></i> 참여 인원 설정</div>
       <div class="range-input-wrapper">
         <span class="range-hint">1 ~</span>
         <input type="number" id="max-number" min="1" max="100" value="100">
+        <span class="range-unit">명</span>
       </div>
     </section>
 
     <!-- Feature 1: Fairness -->
     <section class="card bento-feature-1">
-      <i data-lucide="shield-check" class="feature-icon"></i>
-      <h3>공정한 추출</h3>
-      <p>난수 알고리즘 적용</p>
+      <i data-lucide="check-circle-2" class="feature-icon"></i>
+      <h3>100% 공정</h3>
+      <p>랜덤 알고리즘</p>
     </section>
 
     <!-- Feature 2: Speed -->
     <section class="card bento-feature-2">
-      <i data-lucide="zap" class="feature-icon"></i>
-      <h3>빠른 결과</h3>
-      <p>즉시 확인 가능</p>
+      <i data-lucide="mouse-pointer-2" class="feature-icon"></i>
+      <h3>원클릭 추첨</h3>
+      <p>간편한 사용법</p>
     </section>
 
     <!-- FAQ/Guide Card -->
     <section class="card bento-guide">
-      <div class="card-label"><i data-lucide="help-circle"></i> 가이드</div>
+      <div class="card-label"><i data-lucide="info"></i> 서비스 안내</div>
       <div class="faq-mini">
         <details>
-          <summary>최대 범위는?</summary>
-          <p>현재 100까지 지원합니다.</p>
+          <summary>어떻게 사용하나요?</summary>
+          <p>인원수를 입력하고 버튼을 누르세요.</p>
         </details>
         <details>
-          <summary>조작이 없나요?</summary>
-          <p>공개된 알고리즘을 사용합니다.</p>
+          <summary>결과가 공정한가요?</summary>
+          <p>모든 번호는 동일 확률로 추출됩니다.</p>
         </details>
       </div>
     </section>
 
-    <!-- Partnership Card -->
+    <!-- Partnership Card (Expanded) -->
     <section class="card bento-contact">
-      <div class="card-label"><i data-lucide="mail"></i> 제휴 문의</div>
-      <form action="https://formspree.io/f/maqlzlbq" method="POST" class="mini-form">
-        <input type="email" name="email" required placeholder="이메일">
-        <button type="submit">제출</button>
+      <div class="card-label"><i data-lucide="handshake"></i> 비즈니스 제휴</div>
+      <form action="https://formspree.io/f/maqlzlbq" method="POST" class="full-form">
+        <input type="email" name="email" required placeholder="이메일 주소">
+        <textarea name="message" required placeholder="제휴 제안 내용을 입력해 주세요..."></textarea>
+        <button type="submit" class="submit-btn">제안 제출하기</button>
       </form>
     </section>
 
-    <!-- Disqus Card (Wide) -->
+    <!-- Disqus Card -->
     <section class="card bento-comments">
-      <div class="card-label"><i data-lucide="message-square"></i> 소통 공간</div>
+      <div class="card-label"><i data-lucide="messages-square"></i> 커뮤니티</div>
       <div id="disqus_thread"></div>
     </section>
   </div>
 
   <script>
-    // Initialize Lucide icons
     lucide.createIcons();
   </script>
   <script defer type="text/javascript" src="/main.js"></script>
-  <!-- Disqus Script -->
   <script>
     (function() {
     var d = document, s = d.createElement('script');
