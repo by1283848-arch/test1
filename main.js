@@ -1,8 +1,9 @@
 const themeToggle = document.getElementById('theme-toggle');
-const generateBtn = document.getElementById('generate-lotto');
-const lottoContainer = document.getElementById('lotto-container');
+const spinBtn = document.getElementById('spin-btn');
+const maxNumberInput = document.getElementById('max-number');
+const resultDisplay = document.getElementById('result-number');
 
-// 테마 로직
+// Theme Logic
 const currentTheme = localStorage.getItem('theme');
 if (currentTheme) {
   document.documentElement.setAttribute('data-theme', currentTheme);
@@ -22,34 +23,34 @@ themeToggle.addEventListener('click', () => {
   }
 });
 
-// 로또 로직
-function generateLottoNumbers() {
-  const numbers = [];
-  while (numbers.length < 6) {
-    const num = Math.floor(Math.random() * 45) + 1;
-    if (!numbers.includes(num)) {
-      numbers.push(num);
+// Roulette Logic
+let isSpinning = false;
+
+spinBtn.addEventListener('click', () => {
+  if (isSpinning) return;
+  
+  const maxNum = parseInt(maxNumberInput.value) || 100;
+  const clampedMax = Math.min(Math.max(maxNum, 1), 100);
+  maxNumberInput.value = clampedMax;
+
+  isSpinning = true;
+  spinBtn.disabled = true;
+  resultDisplay.classList.add('spinning');
+
+  let duration = 2000; // 2 seconds
+  let startTime = Date.now();
+  
+  const spinInterval = setInterval(() => {
+    const tempRandom = Math.floor(Math.random() * clampedMax) + 1;
+    resultDisplay.textContent = tempRandom;
+    
+    if (Date.now() - startTime >= duration) {
+      clearInterval(spinInterval);
+      const finalResult = Math.floor(Math.random() * clampedMax) + 1;
+      resultDisplay.textContent = finalResult;
+      resultDisplay.classList.remove('spinning');
+      isSpinning = false;
+      spinBtn.disabled = false;
     }
-  }
-  return numbers.sort((a, b) => a - b);
-}
-
-function displayLottoSets() {
-  lottoContainer.innerHTML = '';
-  for (let i = 0; i < 5; i++) {
-    const set = generateLottoNumbers();
-    const row = document.createElement('div');
-    row.className = 'lotto-row';
-    
-    set.forEach(num => {
-      const ball = document.createElement('div');
-      ball.className = 'ball';
-      ball.textContent = num;
-      row.appendChild(ball);
-    });
-    
-    lottoContainer.appendChild(row);
-  }
-}
-
-generateBtn.addEventListener('click', displayLottoSets);
+  }, 50);
+});

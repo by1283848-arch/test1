@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>프리미엄 로또 번호 생성기 | 행운과 통계의 만남</title>
-  <meta name="description" content="고급 알고리즘을 활용한 로또 번호 생성기입니다. 최신 로또 통계 정보와 분석 가이드를 확인해 보세요.">
+  <title>프리미엄 럭키 룰렛 | 행운의 숫자 추첨</title>
+  <meta name="description" content="1부터 100까지 원하는 범위를 설정하여 행운의 숫자를 뽑아보세요. 깔끔한 디자인의 랜덤 숫자 룰렛입니다.">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8027110651673312"
      crossorigin="anonymous"></script>
   <link href='/style.css' rel='stylesheet'>
@@ -12,9 +12,9 @@
 <body>
   <nav class="navbar">
     <div class="nav-container">
-      <a href="#" class="nav-logo">Premium Lotto</a>
+      <a href="#" class="nav-logo">Lucky Roulette</a>
       <div class="nav-links">
-        <a href="#lotto">생성기</a>
+        <a href="#roulette">룰렛</a>
         <a href="#guide">가이드</a>
         <a href="#contact">제휴</a>
         <button id="theme-toggle">다크 모드</button>
@@ -23,27 +23,34 @@
   </nav>
   
   <div class="container">
-    <!-- 메인 생성기 섹션 -->
-    <section id="lotto" class="glass-card lotto-section">
-      <h1>Premium Lotto Generator</h1>
-      <p class="section-desc">무작위 추출을 넘어선 행운의 조합, 지금 바로 확인하세요.</p>
-      <div id="lotto-container">
-        <!-- 로또 번호 세트 생성 영역 -->
+    <!-- 메인 룰렛 섹션 -->
+    <section id="roulette" class="glass-card roulette-section">
+      <h1>Lucky Roulette</h1>
+      <p class="section-desc">1부터 설정한 숫자 사이의 행운을 잡으세요.</p>
+      
+      <div class="input-container">
+        <label for="max-number">최대 숫자 설정 (1~100):</label>
+        <input type="number" id="max-number" min="1" max="100" value="100">
       </div>
-      <button id="generate-lotto" class="main-button">행운의 번호 생성하기</button>
+
+      <div class="roulette-display">
+        <div id="result-number">?</div>
+      </div>
+      
+      <button id="spin-btn" class="main-button">룰렛 돌리기</button>
     </section>
 
-    <!-- 고품질 정보성 콘텐츠 섹션 -->
+    <!-- 정보성 콘텐츠 섹션 -->
     <section id="guide" class="glass-card info-section">
-      <h2>로또 번호 선택 가이드</h2>
+      <h2>룰렛 게임 활용법</h2>
       <div class="info-grid">
         <div class="info-item">
-          <h3>통계의 중요성</h3>
-          <p>로또는 확률의 게임입니다. 자주 나오는 번호와 드물게 나오는 번호의 균형을 맞추는 것이 핵심 전략 중 하나입니다.</p>
+          <h3>공정한 무작위성</h3>
+          <p>모든 숫자는 동일한 확률로 추출됩니다. 이벤트 추첨, 내기, 오늘트 숫지 뽑기 등 다양한 용도로 활용해 보세요.</p>
         </div>
         <div class="info-item">
-          <h3>책임감 있는 게임</h3>
-          <p>로또는 재미로 즐기는 것이 중요합니다. 예산 내에서 소액으로 즐기는 건전한 문화를 권장합니다.</p>
+          <h3>맞춤형 범위 설정</h3>
+          <p>1부터 최대 100까지 원하는 숫자를 입력하여 추첨 범위를 자유롭게 조절할 수 있습니다.</p>
         </div>
       </div>
     </section>
@@ -53,12 +60,12 @@
       <h2>자주 묻는 질문 (FAQ)</h2>
       <div class="faq-list">
         <details>
-          <summary>이 생성기는 어떤 원리로 작동하나요?</summary>
-          <p>JavaScript의 강력한 무작위 추출 알고리즘을 사용하여 1부터 45까지의 번호를 중복 없이 공정하게 생성합니다.</p>
+          <summary>숫자가 정말 무작위인가요?</summary>
+          <p>네, 암호학적으로 안전한 난수 생성 방식을 기반으로 하여 매번 예측 불가능한 결과를 제공합니다.</p>
         </details>
         <details>
-          <summary>생성된 번호의 당첨 확률은 어떻게 되나요?</summary>
-          <p>모든 번호의 추출 확률은 동일하며, 본 서비스는 번호를 추천할 뿐 당첨을 보장하지는 않습니다.</p>
+          <summary>100 이상의 숫자는 불가능한가요?</summary>
+          <p>현재는 최적화된 사용자 경험을 위해 1~100 범위를 권장하고 있습니다.</p>
         </details>
       </div>
     </section>
@@ -96,7 +103,7 @@
 
   <footer class="footer">
     <div class="footer-container">
-      <p>&copy; 2024 Premium Lotto. All rights reserved.</p>
+      <p>&copy; 2024 Lucky Roulette. All rights reserved.</p>
       <div class="footer-links">
         <a href="#">개인정보처리방침</a>
         <a href="#">이용약관</a>
