@@ -2,11 +2,11 @@ const themeToggle = document.getElementById('theme-toggle');
 const generateBtn = document.getElementById('generate-lotto');
 const lottoContainer = document.getElementById('lotto-container');
 
-// Theme Logic
+// 테마 로직
 const currentTheme = localStorage.getItem('theme');
 if (currentTheme) {
   document.documentElement.setAttribute('data-theme', currentTheme);
-  themeToggle.textContent = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+  themeToggle.textContent = currentTheme === 'dark' ? '라이트 모드' : '다크 모드';
 }
 
 themeToggle.addEventListener('click', () => {
@@ -14,15 +14,15 @@ themeToggle.addEventListener('click', () => {
   if (theme === 'dark') {
     document.documentElement.removeAttribute('data-theme');
     localStorage.setItem('theme', 'light');
-    themeToggle.textContent = 'Dark Mode';
+    themeToggle.textContent = '다크 모드';
   } else {
     document.documentElement.setAttribute('data-theme', 'dark');
     localStorage.setItem('theme', 'dark');
-    themeToggle.textContent = 'Light Mode';
+    themeToggle.textContent = '라이트 모드';
   }
 });
 
-// Lotto Logic
+// 로또 로직
 function generateLottoNumbers() {
   const numbers = [];
   while (numbers.length < 6) {
