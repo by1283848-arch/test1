@@ -3,12 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Theme Toggle App</title>
+  <title>Lotto Number Generator</title>
   <link href='/style.css' rel='stylesheet'>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button id="theme-toggle">Switch to Dark Mode</button>
+  <div class="header">
+    <button id="theme-toggle">Dark Mode</button>
+  </div>
+  
+  <div class="container">
+    <h1>Lotto Numbers</h1>
+    <div id="lotto-container">
+      <!-- Lotto sets will be generated here -->
+    </div>
+    <button id="generate-lotto">Generate Numbers</button>
+  </div>
+
   <script defer type="text/javascript" src="/main.js"></script>
 </body>
 </html>
