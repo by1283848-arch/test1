@@ -11,8 +11,10 @@
   --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --card-radius: 24px;
   --roulette-item-width: 120px;
-  --roulette-item-height: 140px;
+  --roulette-item-height: 160px;
+  --roulette-visible-items: 7;
 }
+
 
 [data-theme="dark"] {
   --bg-color: #111111;
@@ -78,9 +80,14 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  gap: 2rem;
+  gap: 1.5rem;
   background: linear-gradient(135deg, var(--card-bg) 0%, var(--accent-light) 200%);
-  padding: 3rem;
+  padding: 2.5rem;
+}
+
+.card-content {
+  width: min(1120px, 100%);
+  margin: 0 auto;
 }
 
 /* Fullscreen Specific */
@@ -119,10 +126,18 @@ body {
   height: 100vh;
   border-radius: 0;
   border: none;
-  padding: 4rem;
+  padding: 1.5rem 2rem 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+:fullscreen .card-content {
+  width: min(1320px, 100%);
+}
+
+:fullscreen .title-edit-wrapper {
+  margin-bottom: 0.75rem;
 }
 
 .bento-range { grid-column: span 2; }
@@ -155,7 +170,7 @@ body {
   font-size: 2.5rem;
   font-weight: 800;
   text-align: center;
-  padding: 0.5rem 2.5rem; /* Space for absolute icon */
+  padding: 0.35rem 2.5rem; /* Space for absolute icon */
   width: 100%;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -192,10 +207,10 @@ body {
 
 .roulette-container {
   position: relative;
-  width: calc(var(--roulette-item-width) * 5);
+  width: calc(var(--roulette-item-width) * var(--roulette-visible-items));
   max-width: 95%;
   height: var(--roulette-item-height);
-  margin: 2.5rem auto;
+  margin: 1.5rem auto;
   overflow: visible;
   background: rgba(0, 0, 0, 0.05);
   border-radius: 24px;
@@ -257,7 +272,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3.5rem; /* Shrunk to ensure it stays inside the box */
+  font-size: 4rem;
   font-weight: 900;
   color: var(--text-main);
   transition: all 0.3s ease;
@@ -351,11 +366,16 @@ textarea { min-height: 80px; resize: vertical; font-size: 0.9rem; }
 }
 
 @media (max-width: 850px) {
+  :root { --roulette-visible-items: 5; }
   .bento-container { grid-template-columns: repeat(2, 1fr); }
   .bento-header, .bento-comments { grid-column: span 2; }
 }
 
 @media (max-width: 500px) {
+  :root { --roulette-visible-items: 3; --roulette-item-height: 120px; }
   .bento-container { grid-template-columns: 1fr; }
   .card { grid-column: span 1 !important; grid-row: auto !important; }
+  .bento-main { padding: 1.25rem; }
+  .editable-title { font-size: 1.9rem; }
+  .roulette-item { font-size: 3rem; }
 }
