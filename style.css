@@ -190,11 +190,11 @@ body {
 
 .roulette-container {
   position: relative;
-  width: 600px; /* 120px * 5 items */
+  width: 700px; /* 140px * 5 items */
   max-width: 95%;
-  height: 160px;
-  margin: 2rem auto;
-  overflow: visible; /* Changed to visible to let marker stick out */
+  height: 140px;
+  margin: 2.5rem auto;
+  overflow: visible;
   background: rgba(0, 0, 0, 0.05);
   border-radius: 24px;
   display: flex;
@@ -211,8 +211,8 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 130px;
-  height: 180px; /* Taller than container */
+  width: 150px;
+  height: 150px; /* Square and slightly larger than container */
   border: 6px solid var(--accent);
   border-radius: 20px;
   transform: translate(-50%, -50%);
@@ -250,13 +250,13 @@ body {
 }
 
 .roulette-item {
-  min-width: 120px;
-  width: 120px;
-  height: 140px;
+  min-width: 140px;
+  width: 140px;
+  height: 140px; /* Square items */
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 5rem;
+  font-size: 4rem; /* Adjusted font size to prevent overflow */
   font-weight: 900;
   color: var(--text-main);
   transition: all 0.3s ease;
