@@ -1,13 +1,13 @@
 const themeToggle = document.getElementById('theme-toggle');
 const spinBtn = document.getElementById('spin-btn');
 const maxNumberInput = document.getElementById('max-number');
-const resultDisplay = document.getElementById('result-number');
+const rouletteStrip = document.getElementById('roulette-strip');
 
 // Theme Logic
 const currentTheme = localStorage.getItem('theme');
 if (currentTheme) {
   document.documentElement.setAttribute('data-theme', currentTheme);
-  themeToggle.textContent = currentTheme === 'dark' ? '라이트 모드' : '다크 모드';
+  themeToggle.innerHTML = currentTheme === 'dark' ? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>';
 }
 
 themeToggle.addEventListener('click', () => {
@@ -15,13 +15,44 @@ themeToggle.addEventListener('click', () => {
   if (theme === 'dark') {
     document.documentElement.removeAttribute('data-theme');
     localStorage.setItem('theme', 'light');
-    themeToggle.textContent = '다크 모드';
+    themeToggle.innerHTML = '<i data-lucide="moon"></i>';
   } else {
     document.documentElement.setAttribute('data-theme', 'dark');
     localStorage.setItem('theme', 'dark');
-    themeToggle.textContent = '라이트 모드';
+    themeToggle.innerHTML = '<i data-lucide="sun"></i>';
   }
+  lucide.createIcons();
 });
+
+// Confetti Effect
+function createConfetti() {
+  const container = document.querySelector('.bento-main');
+  for (let i = 0; i < 50; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    
+    const x = Math.random() * container.offsetWidth;
+    const y = -20;
+    const color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+    
+    particle.style.left = x + 'px';
+    particle.style.top = y + 'px';
+    particle.style.backgroundColor = color;
+    particle.style.transform = `rotate(${Math.random() * 360}deg)`;
+    
+    container.appendChild(particle);
+    
+    const animation = particle.animate([
+      { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+      { transform: `translate(${(Math.random() - 0.5) * 200}px, ${container.offsetHeight}px) rotate(${Math.random() * 1000}deg)`, opacity: 0 }
+    ], {
+      duration: 1000 + Math.random() * 2000,
+      easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+    });
+    
+    animation.onfinish = () => particle.remove();
+  }
+}
 
 // Roulette Logic
 let isSpinning = false;
@@ -30,27 +61,56 @@ spinBtn.addEventListener('click', () => {
   if (isSpinning) return;
   
   const maxNum = parseInt(maxNumberInput.value) || 100;
-  const clampedMax = Math.min(Math.max(maxNum, 1), 100);
+  const clampedMax = Math.min(Math.max(maxNum, 1), 1000);
   maxNumberInput.value = clampedMax;
 
   isSpinning = true;
   spinBtn.disabled = true;
-  resultDisplay.classList.add('spinning');
 
-  let duration = 2000; // 2 seconds
-  let startTime = Date.now();
+  // Reset Strip
+  rouletteStrip.style.transition = 'none';
+  rouletteStrip.style.transform = 'translateX(0)';
+  rouletteStrip.innerHTML = '';
   
-  const spinInterval = setInterval(() => {
-    const tempRandom = Math.floor(Math.random() * clampedMax) + 1;
-    resultDisplay.textContent = tempRandom;
+  const itemWidth = 100;
+  const totalItems = 50; // Numbers to show in the strip
+  const winningIndex = totalItems - 5; // The winning number will be near the end
+  const winningNumber = Math.floor(Math.random() * clampedMax) + 1;
+
+  // Generate Items
+  for (let i = 0; i < totalItems; i++) {
+    const item = document.createElement('span');
+    item.classList.add('roulette-item');
+    if (i === winningIndex) {
+      item.textContent = winningNumber;
+      item.id = 'winner-item';
+    } else {
+      item.textContent = Math.floor(Math.random() * clampedMax) + 1;
+    }
+    rouletteStrip.appendChild(item);
+  }
+
+  // Trigger Animation
+  setTimeout(() => {
+    rouletteStrip.style.transition = 'transform 4s cubic-bezier(0.15, 0, 0.15, 1)';
+    const offset = -(winningIndex * itemWidth);
+    rouletteStrip.style.transform = `translateX(${offset}px)`;
+    rouletteStrip.classList.add('spinning');
+  }, 50);
+
+  setTimeout(() => {
+    rouletteStrip.classList.remove('spinning');
+    const winner = document.getElementById('winner-item');
+    winner.classList.add('winner');
+    winner.classList.add('win-animation');
+    document.querySelector('.bento-main').classList.add('confetti-glow');
     
-    if (Date.now() - startTime >= duration) {
-      clearInterval(spinInterval);
-      const finalResult = Math.floor(Math.random() * clampedMax) + 1;
-      resultDisplay.textContent = finalResult;
-      resultDisplay.classList.remove('spinning');
+    createConfetti();
+
+    setTimeout(() => {
       isSpinning = false;
       spinBtn.disabled = false;
-    }
-  }, 50);
+      document.querySelector('.bento-main').classList.remove('confetti-glow');
+    }, 2000);
+  }, 4100);
 });

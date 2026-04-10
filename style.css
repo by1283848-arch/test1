@@ -54,7 +54,7 @@ body {
   border-radius: var(--card-radius);
   padding: 1.5rem;
   box-shadow: var(--shadow);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
@@ -66,15 +66,16 @@ body {
 .logo { font-weight: 700; font-size: 1.25rem; color: var(--accent); }
 
 .bento-main {
-  grid-column: span 2;
+  grid-column: span 4;
   grid-row: span 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  gap: 1.5rem;
+  gap: 2rem;
   background: linear-gradient(135deg, var(--card-bg) 0%, var(--accent-light) 200%);
+  padding: 3rem;
 }
 
 .bento-range { grid-column: span 2; }
@@ -89,8 +90,84 @@ body {
 .accent-icon { width: 48px; height: 48px; color: var(--accent); }
 .feature-icon { width: 32px; height: 32px; color: var(--accent); margin-bottom: 0.5rem; }
 
-.roulette-display { font-size: 5rem; font-weight: 800; margin: 1rem 0; font-variant-numeric: tabular-nums; }
-.primary-btn { background-color: var(--accent); color: white; border: none; padding: 1rem 2.5rem; border-radius: 16px; font-weight: 600; cursor: pointer; }
+.roulette-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: 120px;
+  margin: 2rem 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--border-color);
+}
+
+[data-theme="dark"] .roulette-container {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.roulette-marker {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent);
+  transform: translateX(-50%);
+  z-index: 10;
+  box-shadow: 0 0 15px var(--accent);
+}
+
+.roulette-marker::before, .roulette-marker::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.roulette-marker::before {
+  top: 0;
+  border-top: 10px solid var(--accent);
+}
+
+.roulette-marker::after {
+  bottom: 0;
+  border-bottom: 10px solid var(--accent);
+}
+
+.roulette-strip {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  transition: transform 3s cubic-bezier(0.15, 0, 0.15, 1);
+  will-change: transform;
+}
+
+.roulette-item {
+  min-width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-main);
+  transition: all 0.3s ease;
+}
+
+.roulette-item.winner {
+  color: var(--accent);
+  transform: scale(1.3);
+  text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+}
+
+.primary-btn { background-color: var(--accent); color: white; border: none; padding: 1.25rem 4rem; border-radius: 20px; font-size: 1.25rem; font-weight: 700; cursor: pointer; transition: transform 0.2s; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3); }
+.primary-btn:hover { transform: translateY(-3px); }
 
 .range-input-wrapper { display: flex; align-items: center; gap: 0.5rem; justify-content: center; }
 .range-hint { font-weight: 600; font-size: 1.25rem; }
@@ -127,8 +204,41 @@ textarea { min-height: 80px; resize: vertical; font-size: 0.9rem; }
 .faq-mini p { font-size: 0.85rem; color: var(--text-sub); margin-top: 0.5rem; }
 
 /* Animations */
-.spinning { animation: bounce 0.1s infinite alternate; }
-@keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+.spinning {
+  filter: blur(2px);
+}
+
+.win-animation {
+  animation: win-impact 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes win-impact {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); filter: drop-shadow(0 0 30px var(--accent)); }
+  100% { transform: scale(1.1); }
+}
+
+.confetti-glow {
+  box-shadow: 0 0 60px var(--accent);
+  border-color: var(--accent);
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 40px var(--accent); }
+  50% { box-shadow: 0 0 80px var(--accent); }
+}
+
+/* Confetti Particles */
+.particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  pointer-events: none;
+  z-index: 100;
+  border-radius: 2px;
+}
 
 @media (max-width: 850px) {
   .bento-container { grid-template-columns: repeat(2, 1fr); }
@@ -138,4 +248,5 @@ textarea { min-height: 80px; resize: vertical; font-size: 0.9rem; }
 @media (max-width: 500px) {
   .bento-container { grid-template-columns: 1fr; }
   .card { grid-column: span 1 !important; grid-row: auto !important; }
+  .roulette-display { font-size: 5rem; }
 }
