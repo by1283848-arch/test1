@@ -106,11 +106,14 @@ function createConfetti() {
 const spinDuration = 6500;
 let isSpinning = false;
 let pendingWinner = null;
+const rouletteContainer = document.querySelector('.roulette-container');
 
 function resetRevealState() {
   pendingWinner = null;
   revealBtn.hidden = true;
   revealBtn.disabled = true;
+  rouletteContainer.classList.remove('awaiting-reveal');
+  rouletteStrip.classList.remove('revealing');
   resultCover.hidden = true;
   resultCover.classList.remove('reveal');
 }
@@ -122,7 +125,8 @@ function revealWinner() {
   pendingWinner = null;
   revealBtn.hidden = true;
   revealBtn.disabled = true;
-  resultCover.classList.add('reveal');
+  rouletteContainer.classList.remove('awaiting-reveal');
+  rouletteStrip.classList.add('revealing');
 
   winner.classList.add('winner');
   winner.classList.add('win-animation');
@@ -133,6 +137,7 @@ function revealWinner() {
   setTimeout(() => {
     resultCover.hidden = true;
     resultCover.classList.remove('reveal');
+    rouletteStrip.classList.remove('revealing');
     document.querySelector('.bento-main').classList.remove('confetti-glow');
   }, 2000);
 }
@@ -148,15 +153,14 @@ spinBtn.addEventListener('click', () => {
   spinBtn.disabled = true;
   resetRevealState();
 
-  const rouletteContainer = document.querySelector('.roulette-container');
   rouletteStrip.style.transition = 'none';
   rouletteStrip.style.transform = 'translateX(0)';
   rouletteStrip.innerHTML = '';
   
   const itemWidth = 120;
   document.documentElement.style.setProperty('--roulette-item-width', `${itemWidth}px`);
-  const totalItems = 60;
-  const winningIndex = totalItems - 10;
+  const totalItems = 90 + Math.floor(Math.random() * 31);
+  const winningIndex = totalItems - (8 + Math.floor(Math.random() * 15));
   const winningNumber = Math.floor(Math.random() * clampedMax) + 1;
 
   for (let i = 0; i < totalItems; i++) {
@@ -181,15 +185,16 @@ spinBtn.addEventListener('click', () => {
     const winnerRect = winner.getBoundingClientRect();
     const markerCenter = markerRect.left + (markerRect.width / 2);
     const winnerCenter = winnerRect.left + (winnerRect.width / 2);
-    const offset = markerCenter - winnerCenter;
+    const settleJitter = (Math.random() - 0.5) * itemWidth * 0.34;
+    const offset = markerCenter - winnerCenter + settleJitter;
 
     rouletteStrip.style.transform = `translateX(${offset}px)`;
   }, 50);
 
   setTimeout(() => {
     rouletteContainer.classList.remove('spinning');
+    rouletteContainer.classList.add('awaiting-reveal');
     pendingWinner = document.getElementById('winner-item');
-    resultCover.hidden = false;
     revealBtn.hidden = false;
     revealBtn.disabled = false;
     isSpinning = false;
