@@ -3,9 +3,23 @@ const spinBtn = document.getElementById('spin-btn');
 const maxNumberInput = document.getElementById('max-number');
 const rouletteStrip = document.getElementById('roulette-strip');
 const fullscreenBtn = document.getElementById('fullscreen-btn');
+const soundToggle = document.getElementById('sound-toggle');
 
 // Sound setup
 const spinSound = new Audio('sound/Triple_Seven_Strike.mp3');
+let isMuted = localStorage.getItem('muted') === 'true';
+
+// Initialize sound icon
+if (isMuted) {
+  soundToggle.innerHTML = '<i data-lucide="volume-x"></i>';
+}
+
+soundToggle.addEventListener('click', () => {
+  isMuted = !isMuted;
+  localStorage.setItem('muted', isMuted);
+  soundToggle.innerHTML = isMuted ? '<i data-lucide="volume-x"></i>' : '<i data-lucide="volume-2"></i>';
+  lucide.createIcons();
+});
 
 // Theme Logic
 const currentTheme = localStorage.getItem('theme');
@@ -93,9 +107,11 @@ spinBtn.addEventListener('click', () => {
   isSpinning = true;
   spinBtn.disabled = true;
 
-  // Play sound
-  spinSound.currentTime = 0;
-  spinSound.play().catch(e => console.log("Sound play error: ", e));
+  // Play sound if not muted
+  if (!isMuted) {
+    spinSound.currentTime = 0;
+    spinSound.play().catch(e => console.log("Sound play error: ", e));
+  }
 
   // Reset Strip
   const rouletteContainer = document.querySelector('.roulette-container');
@@ -126,7 +142,6 @@ spinBtn.addEventListener('click', () => {
     rouletteContainer.classList.add('spinning');
     rouletteStrip.style.transition = 'transform 4s cubic-bezier(0.15, 0, 0.15, 1)';
     // Center the item: offset so that item center is at container center
-    // itemWidth = 160, center = 80
     const offset = -(winningIndex * itemWidth + (itemWidth / 2));
     rouletteStrip.style.transform = `translateX(${offset}px)`;
   }, 50);
