@@ -17,7 +17,6 @@ function updateSoundState() {
     spinSound.pause();
   } else {
     soundToggle.innerHTML = '<i data-lucide="volume-2"></i>';
-    // Note: Auto-play might be blocked until user interaction
   }
   lucide.createIcons();
 }
@@ -30,7 +29,7 @@ soundToggle.addEventListener('click', () => {
   if (isMuted) {
     spinSound.pause();
   } else {
-    spinSound.play().catch(e => console.log("Playback blocked: click elsewhere first.", e));
+    spinSound.play().catch(e => console.log("Playback blocked", e));
   }
   updateSoundState();
 });
@@ -60,7 +59,7 @@ themeToggle.addEventListener('click', () => {
 fullscreenBtn.addEventListener('click', () => {
   if (!document.fullscreenElement) {
     document.documentElement.requestFullscreen().catch(err => {
-      console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+      console.error(`Error: ${err.message}`);
     });
     fullscreenBtn.innerHTML = '<i data-lucide="minimize"></i>';
   } else {
@@ -70,7 +69,6 @@ fullscreenBtn.addEventListener('click', () => {
   lucide.createIcons();
 });
 
-// Update icon on esc key
 document.addEventListener('fullscreenchange', () => {
   if (!document.fullscreenElement) {
     fullscreenBtn.innerHTML = '<i data-lucide="maximize"></i>';
@@ -84,18 +82,13 @@ function createConfetti() {
   for (let i = 0; i < 50; i++) {
     const particle = document.createElement('div');
     particle.classList.add('particle');
-    
     const x = Math.random() * container.offsetWidth;
     const y = -20;
     const color = `hsl(${Math.random() * 360}, 70%, 60%)`;
-    
     particle.style.left = x + 'px';
     particle.style.top = y + 'px';
     particle.style.backgroundColor = color;
-    particle.style.transform = `rotate(${Math.random() * 360}deg)`;
-    
     container.appendChild(particle);
-    
     const animation = particle.animate([
       { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
       { transform: `translate(${(Math.random() - 0.5) * 200}px, ${container.offsetHeight}px) rotate(${Math.random() * 1000}deg)`, opacity: 0 }
@@ -103,7 +96,6 @@ function createConfetti() {
       duration: 1000 + Math.random() * 2000,
       easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
     });
-    
     animation.onfinish = () => particle.remove();
   }
 }
@@ -113,26 +105,22 @@ let isSpinning = false;
 
 spinBtn.addEventListener('click', () => {
   if (isSpinning) return;
-  
   const maxNum = parseInt(maxNumberInput.value) || 100;
   const clampedMax = Math.min(Math.max(maxNum, 1), 1000);
   maxNumberInput.value = clampedMax;
-
   isSpinning = true;
   spinBtn.disabled = true;
 
-  // Reset Strip
   const rouletteContainer = document.querySelector('.roulette-container');
   rouletteStrip.style.transition = 'none';
   rouletteStrip.style.transform = 'translateX(0)';
   rouletteStrip.innerHTML = '';
   
-  const itemWidth = 160;
-  const totalItems = 60; // Numbers to show in the strip
-  const winningIndex = totalItems - 10; // The winning number will be near the end
+  const itemWidth = 120;
+  const totalItems = 60;
+  const winningIndex = totalItems - 10;
   const winningNumber = Math.floor(Math.random() * clampedMax) + 1;
 
-  // Generate Items
   for (let i = 0; i < totalItems; i++) {
     const item = document.createElement('span');
     item.classList.add('roulette-item');
@@ -145,11 +133,9 @@ spinBtn.addEventListener('click', () => {
     rouletteStrip.appendChild(item);
   }
 
-  // Trigger Animation
   setTimeout(() => {
     rouletteContainer.classList.add('spinning');
     rouletteStrip.style.transition = 'transform 4s cubic-bezier(0.15, 0, 0.15, 1)';
-    // Center the item: offset so that item center is at container center
     const offset = -(winningIndex * itemWidth + (itemWidth / 2));
     rouletteStrip.style.transform = `translateX(${offset}px)`;
   }, 50);
@@ -160,9 +146,7 @@ spinBtn.addEventListener('click', () => {
     winner.classList.add('winner');
     winner.classList.add('win-animation');
     document.querySelector('.bento-main').classList.add('confetti-glow');
-    
     createConfetti();
-
     setTimeout(() => {
       isSpinning = false;
       spinBtn.disabled = false;
