@@ -5,6 +5,7 @@ const rouletteStrip = document.getElementById('roulette-strip');
 const fullscreenBtn = document.getElementById('fullscreen-btn');
 const soundToggle = document.getElementById('sound-toggle');
 const revealBtn = document.getElementById('reveal-btn');
+const resultCover = document.getElementById('result-cover');
 
 // Sound setup
 const spinSound = new Audio('sound/Triple_Seven_Strike.mp3');
@@ -110,19 +111,28 @@ function resetRevealState() {
   pendingWinner = null;
   revealBtn.hidden = true;
   revealBtn.disabled = true;
+  resultCover.hidden = true;
+  resultCover.classList.remove('reveal');
 }
 
 function revealWinner() {
   if (!pendingWinner) return;
 
-  pendingWinner.classList.add('winner');
-  pendingWinner.classList.add('win-animation');
+  const winner = pendingWinner;
+  pendingWinner = null;
+  revealBtn.hidden = true;
+  revealBtn.disabled = true;
+  resultCover.classList.add('reveal');
+
+  winner.classList.add('winner');
+  winner.classList.add('win-animation');
   document.querySelector('.bento-main').classList.add('confetti-glow');
   createConfetti();
-  resetRevealState();
   spinBtn.disabled = false;
 
   setTimeout(() => {
+    resultCover.hidden = true;
+    resultCover.classList.remove('reveal');
     document.querySelector('.bento-main').classList.remove('confetti-glow');
   }, 2000);
 }
@@ -179,6 +189,7 @@ spinBtn.addEventListener('click', () => {
   setTimeout(() => {
     rouletteContainer.classList.remove('spinning');
     pendingWinner = document.getElementById('winner-item');
+    resultCover.hidden = false;
     revealBtn.hidden = false;
     revealBtn.disabled = false;
     isSpinning = false;

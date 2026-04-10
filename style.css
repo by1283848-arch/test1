@@ -243,9 +243,44 @@ body {
   animation: marker-bounce 0.1s infinite alternate;
 }
 
+.result-cover {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--roulette-item-width);
+  height: var(--roulette-item-height);
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(26, 26, 26, 0.94), rgba(26, 26, 26, 0.82));
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(6px);
+}
+
+[data-theme="dark"] .result-cover {
+  background: linear-gradient(180deg, rgba(129, 140, 248, 0.28), rgba(17, 17, 17, 0.92));
+}
+
+.result-cover.reveal {
+  animation: reveal-cover 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
 @keyframes marker-bounce {
   from { transform: translate(-50%, -50%) scale(1); }
   to { transform: translate(-50%, -50%) scale(1.03); }
+}
+
+@keyframes reveal-cover {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -110%) scale(0.92); opacity: 0; }
 }
 
 .roulette-strip-wrapper {
