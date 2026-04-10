@@ -7,18 +7,32 @@ const soundToggle = document.getElementById('sound-toggle');
 
 // Sound setup
 const spinSound = new Audio('sound/Triple_Seven_Strike.mp3');
+spinSound.loop = true;
 let isMuted = localStorage.getItem('muted') === 'true';
 
-// Initialize sound icon
-if (isMuted) {
-  soundToggle.innerHTML = '<i data-lucide="volume-x"></i>';
+// Initialize sound icon and state
+function updateSoundState() {
+  if (isMuted) {
+    soundToggle.innerHTML = '<i data-lucide="volume-x"></i>';
+    spinSound.pause();
+  } else {
+    soundToggle.innerHTML = '<i data-lucide="volume-2"></i>';
+    // Note: Auto-play might be blocked until user interaction
+  }
+  lucide.createIcons();
 }
+
+updateSoundState();
 
 soundToggle.addEventListener('click', () => {
   isMuted = !isMuted;
   localStorage.setItem('muted', isMuted);
-  soundToggle.innerHTML = isMuted ? '<i data-lucide="volume-x"></i>' : '<i data-lucide="volume-2"></i>';
-  lucide.createIcons();
+  if (isMuted) {
+    spinSound.pause();
+  } else {
+    spinSound.play().catch(e => console.log("Playback blocked: click elsewhere first.", e));
+  }
+  updateSoundState();
 });
 
 // Theme Logic
@@ -106,12 +120,6 @@ spinBtn.addEventListener('click', () => {
 
   isSpinning = true;
   spinBtn.disabled = true;
-
-  // Play sound if not muted
-  if (!isMuted) {
-    spinSound.currentTime = 0;
-    spinSound.play().catch(e => console.log("Sound play error: ", e));
-  }
 
   // Reset Strip
   const rouletteContainer = document.querySelector('.roulette-container');
