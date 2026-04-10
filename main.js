@@ -107,6 +107,8 @@ const spinDuration = 6500;
 let isSpinning = false;
 let pendingWinner = null;
 const rouletteContainer = document.querySelector('.roulette-container');
+const resultSpotlight = document.getElementById('result-spotlight');
+const resultSpotlightValue = document.getElementById('result-spotlight-value');
 
 function setStripOffset(offset) {
   rouletteStrip.style.transform = `translate(${offset}px, -50%)`;
@@ -120,6 +122,9 @@ function resetRevealState() {
   rouletteStrip.classList.remove('revealing');
   resultCover.hidden = true;
   resultCover.classList.remove('reveal');
+  resultSpotlight.hidden = true;
+  resultSpotlight.classList.remove('show');
+  resultSpotlightValue.textContent = '';
 }
 
 function revealWinner() {
@@ -131,6 +136,11 @@ function revealWinner() {
   revealBtn.disabled = true;
   rouletteContainer.classList.remove('awaiting-reveal');
   resultCover.hidden = true;
+  resultSpotlightValue.textContent = winner.textContent;
+  resultSpotlight.hidden = false;
+  resultSpotlight.classList.remove('show');
+  void resultSpotlight.offsetWidth;
+  resultSpotlight.classList.add('show');
 
   winner.classList.add('winner');
   winner.classList.add('win-animation');
@@ -140,8 +150,11 @@ function revealWinner() {
 
   setTimeout(() => {
     resultCover.classList.remove('reveal');
+    resultSpotlight.classList.remove('show');
+    resultSpotlight.hidden = true;
+    resultSpotlightValue.textContent = '';
     document.querySelector('.bento-main').classList.remove('confetti-glow');
-  }, 2000);
+  }, 2200);
 }
 
 revealBtn.addEventListener('click', revealWinner);
