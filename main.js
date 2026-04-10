@@ -4,8 +4,11 @@ const maxNumberInput = document.getElementById('max-number');
 const rouletteStrip = document.getElementById('roulette-strip');
 const fullscreenBtn = document.getElementById('fullscreen-btn');
 const soundToggle = document.getElementById('sound-toggle');
+const languageToggle = document.getElementById('language-toggle');
 const revealBtn = document.getElementById('reveal-btn');
 const resultCover = document.getElementById('result-cover');
+const pageTitle = document.getElementById('page-title');
+const pageDescription = document.getElementById('page-description');
 
 // Sound setup
 const spinSound = new Audio('sound/Triple_Seven_Strike.mp3');
@@ -109,6 +112,122 @@ let pendingWinner = null;
 const rouletteContainer = document.querySelector('.roulette-container');
 const resultSpotlight = document.getElementById('result-spotlight');
 const resultSpotlightValue = document.getElementById('result-spotlight-value');
+
+const translations = {
+  ko: {
+    meta: {
+      title: '선물의 주인공 | 랜덤 숫자 추첨',
+      description: '현대적인 대시보드 스타일의 랜덤 숫자 추첨기, 선물의 주인공을 찾아보세요.'
+    },
+    brand: { logo: '선물의 주인공' },
+    roulette: {
+      titlePlaceholder: '추첨 제목 입력...',
+      spotlightLabel: '당첨 번호'
+    },
+    buttons: {
+      spin: '주인공 찾기',
+      reveal: '결과 보기'
+    },
+    range: {
+      label: '참여 인원 설정',
+      unit: '명'
+    },
+    features: {
+      fair: { title: '100% 공정', body: '랜덤 알고리즘' },
+      speed: { title: '원클릭 추첨', body: '간편한 사용법' }
+    },
+    guide: {
+      label: '서비스 안내',
+      q1: '어떻게 사용하나요?',
+      a1: '인원수를 입력하고 버튼을 누르세요.',
+      q2: '결과가 공정한가요?',
+      a2: '모든 번호는 동일 확률로 추출됩니다.'
+    },
+    contact: {
+      label: '비즈니스 제휴',
+      emailPlaceholder: '이메일 주소',
+      messagePlaceholder: '제휴 제안 내용을 입력해 주세요...',
+      submit: '제안 제출하기'
+    },
+    community: { label: '커뮤니티' },
+    controls: { languageToggle: 'EN' }
+  },
+  en: {
+    meta: {
+      title: 'Gift Winner | Random Number Draw',
+      description: 'A modern dashboard-style random number picker to find the winner fast and fairly.'
+    },
+    brand: { logo: 'Gift Winner' },
+    roulette: {
+      titlePlaceholder: 'Enter draw title...',
+      spotlightLabel: 'Winning Number'
+    },
+    buttons: {
+      spin: 'Pick the Winner',
+      reveal: 'Show Result'
+    },
+    range: {
+      label: 'Participant Range',
+      unit: 'people'
+    },
+    features: {
+      fair: { title: '100% Fair', body: 'Random algorithm' },
+      speed: { title: 'One-Click Draw', body: 'Simple to use' }
+    },
+    guide: {
+      label: 'How It Works',
+      q1: 'How do I use it?',
+      a1: 'Enter the participant count and press the button.',
+      q2: 'Is the result fair?',
+      a2: 'Every number is selected with equal probability.'
+    },
+    contact: {
+      label: 'Business Inquiries',
+      emailPlaceholder: 'Email address',
+      messagePlaceholder: 'Tell us about your partnership proposal...',
+      submit: 'Send Proposal'
+    },
+    community: { label: 'Community' },
+    controls: { languageToggle: 'KO' }
+  }
+};
+
+function getTranslation(locale, key) {
+  return key.split('.').reduce((value, part) => value?.[part], translations[locale]);
+}
+
+function applyTranslations(locale) {
+  document.documentElement.lang = locale;
+  pageTitle.textContent = translations[locale].meta.title;
+  pageDescription.setAttribute('content', translations[locale].meta.description);
+
+  document.querySelectorAll('[data-i18n]').forEach((element) => {
+    const value = getTranslation(locale, element.dataset.i18n);
+    if (value) element.textContent = value;
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((element) => {
+    const value = getTranslation(locale, element.dataset.i18nPlaceholder);
+    if (value) element.setAttribute('placeholder', value);
+  });
+
+  languageToggle.textContent = translations[locale].controls.languageToggle;
+}
+
+function detectInitialLanguage() {
+  const savedLanguage = localStorage.getItem('language');
+  if (savedLanguage === 'ko' || savedLanguage === 'en') return savedLanguage;
+  return navigator.language?.toLowerCase().startsWith('ko') ? 'ko' : 'en';
+}
+
+let currentLanguage = detectInitialLanguage();
+applyTranslations(currentLanguage);
+
+languageToggle.addEventListener('click', () => {
+  currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
+  localStorage.setItem('language', currentLanguage);
+  applyTranslations(currentLanguage);
+});
 
 function setStripOffset(offset) {
   rouletteStrip.style.transform = `translate(${offset}px, -50%)`;

@@ -70,7 +70,8 @@ body {
 /* Layouts */
 .bento-header { grid-column: span 4; display: flex; justify-content: space-between; align-items: center; }
 .logo { font-weight: 700; font-size: 1.25rem; color: var(--accent); }
-.header-actions { display: flex; gap: 0.5rem; }
+.header-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+.language-btn { min-width: 3.25rem; font-weight: 800; letter-spacing: 0.08em; }
 
 .bento-main {
   grid-column: span 4;

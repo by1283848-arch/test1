@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>선물의 주인공 | 랜덤 숫자 추첨</title>
-  <meta name="description" content="현대적인 대시보드 스타일의 랜덤 숫자 추첨기, 선물의 주인공을 찾아보세요.">
+  <title id="page-title">선물의 주인공 | 랜덤 숫자 추첨</title>
+  <meta id="page-description" name="description" content="현대적인 대시보드 스타일의 랜덤 숫자 추첨기, 선물의 주인공을 찾아보세요.">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8Q6Q16L84B"></script>
   <script>
@@ -31,9 +31,10 @@
   <div class="bento-container">
     <!-- Header Card -->
     <header class="card bento-header">
-      <div class="logo">선물의 주인공</div>
+      <div class="logo" data-i18n="brand.logo">선물의 주인공</div>
       <div class="header-actions">
-        <button id="sound-toggle" class="icon-btn"><i data-lucide="volume-2"></i></button>
+        <button id="language-toggle" class="icon-btn language-btn" type="button">EN</button>
+        <button id="sound-toggle" class="icon-btn" type="button"><i data-lucide="volume-2"></i></button>
         <button id="fullscreen-btn" class="icon-btn"><i data-lucide="maximize"></i></button>
         <button id="theme-toggle" class="icon-btn"><i data-lucide="sun"></i></button>
       </div>
@@ -44,14 +45,14 @@
       <div class="card-content">
         <i data-lucide="gift" class="accent-icon"></i>
         <div class="title-edit-wrapper">
-          <input type="text" id="roulette-title" class="editable-title" value="" placeholder="추첨 제목 입력...">
+          <input type="text" id="roulette-title" class="editable-title" value="" placeholder="추첨 제목 입력..." data-i18n-placeholder="roulette.titlePlaceholder">
           <i data-lucide="pencil" class="edit-icon"></i>
         </div>
         <div class="roulette-container">
           <div class="roulette-marker"></div>
           <div id="result-cover" class="result-cover" hidden></div>
           <div id="result-spotlight" class="result-spotlight" hidden>
-            <div class="result-spotlight-label">당첨 번호</div>
+            <div class="result-spotlight-label" data-i18n="roulette.spotlightLabel">당첨 번호</div>
             <div id="result-spotlight-value" class="result-spotlight-value"></div>
           </div>
           <div class="roulette-strip-wrapper">
@@ -61,64 +62,64 @@
           </div>
         </div>
         <div class="action-row">
-          <button id="spin-btn" class="primary-btn">주인공 찾기</button>
-          <button id="reveal-btn" class="secondary-btn" hidden disabled>결과 보기</button>
+          <button id="spin-btn" class="primary-btn" data-i18n="buttons.spin">주인공 찾기</button>
+          <button id="reveal-btn" class="secondary-btn" hidden disabled data-i18n="buttons.reveal">결과 보기</button>
         </div>
       </div>
     </main>
 
     <!-- Range Setting Card -->
     <section class="card bento-range">
-      <div class="card-label"><i data-lucide="users"></i> 참여 인원 설정</div>
+      <div class="card-label"><i data-lucide="users"></i> <span data-i18n="range.label">참여 인원 설정</span></div>
       <div class="range-input-wrapper">
         <span class="range-hint">1 ~</span>
         <input type="number" id="max-number" min="1" max="100" value="100">
-        <span class="range-unit">명</span>
+        <span class="range-unit" data-i18n="range.unit">명</span>
       </div>
     </section>
 
     <!-- Feature 1: Fairness -->
     <section class="card bento-feature-1">
       <i data-lucide="check-circle-2" class="feature-icon"></i>
-      <h3>100% 공정</h3>
-      <p>랜덤 알고리즘</p>
+      <h3 data-i18n="features.fair.title">100% 공정</h3>
+      <p data-i18n="features.fair.body">랜덤 알고리즘</p>
     </section>
 
     <!-- Feature 2: Speed -->
     <section class="card bento-feature-2">
       <i data-lucide="mouse-pointer-2" class="feature-icon"></i>
-      <h3>원클릭 추첨</h3>
-      <p>간편한 사용법</p>
+      <h3 data-i18n="features.speed.title">원클릭 추첨</h3>
+      <p data-i18n="features.speed.body">간편한 사용법</p>
     </section>
 
     <!-- FAQ/Guide Card -->
     <section class="card bento-guide">
-      <div class="card-label"><i data-lucide="info"></i> 서비스 안내</div>
+      <div class="card-label"><i data-lucide="info"></i> <span data-i18n="guide.label">서비스 안내</span></div>
       <div class="faq-mini">
         <details>
-          <summary>어떻게 사용하나요?</summary>
-          <p>인원수를 입력하고 버튼을 누르세요.</p>
+          <summary data-i18n="guide.q1">어떻게 사용하나요?</summary>
+          <p data-i18n="guide.a1">인원수를 입력하고 버튼을 누르세요.</p>
         </details>
         <details>
-          <summary>결과가 공정한가요?</summary>
-          <p>모든 번호는 동일 확률로 추출됩니다.</p>
+          <summary data-i18n="guide.q2">결과가 공정한가요?</summary>
+          <p data-i18n="guide.a2">모든 번호는 동일 확률로 추출됩니다.</p>
         </details>
       </div>
     </section>
 
     <!-- Partnership Card (Expanded) -->
     <section class="card bento-contact">
-      <div class="card-label"><i data-lucide="handshake"></i> 비즈니스 제휴</div>
+      <div class="card-label"><i data-lucide="handshake"></i> <span data-i18n="contact.label">비즈니스 제휴</span></div>
       <form action="https://formspree.io/f/maqlzlbq" method="POST" class="full-form">
-        <input type="email" name="email" required placeholder="이메일 주소">
-        <textarea name="message" required placeholder="제휴 제안 내용을 입력해 주세요..."></textarea>
-        <button type="submit" class="submit-btn">제안 제출하기</button>
+        <input type="email" name="email" required placeholder="이메일 주소" data-i18n-placeholder="contact.emailPlaceholder">
+        <textarea name="message" required placeholder="제휴 제안 내용을 입력해 주세요..." data-i18n-placeholder="contact.messagePlaceholder"></textarea>
+        <button type="submit" class="submit-btn" data-i18n="contact.submit">제안 제출하기</button>
       </form>
     </section>
 
     <!-- Disqus Card -->
     <section class="card bento-comments">
-      <div class="card-label"><i data-lucide="messages-square"></i> 커뮤니티</div>
+      <div class="card-label"><i data-lucide="messages-square"></i> <span data-i18n="community.label">커뮤니티</span></div>
       <div id="disqus_thread"></div>
     </section>
   </div>
