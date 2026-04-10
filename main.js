@@ -4,6 +4,9 @@ const maxNumberInput = document.getElementById('max-number');
 const rouletteStrip = document.getElementById('roulette-strip');
 const fullscreenBtn = document.getElementById('fullscreen-btn');
 
+// Sound setup
+const spinSound = new Audio('sound/Triple_Seven_Strike.mp3');
+
 // Theme Logic
 const currentTheme = localStorage.getItem('theme');
 if (currentTheme) {
@@ -89,6 +92,10 @@ spinBtn.addEventListener('click', () => {
 
   isSpinning = true;
   spinBtn.disabled = true;
+
+  // Play sound
+  spinSound.currentTime = 0;
+  spinSound.play().catch(e => console.log("Sound play error: ", e));
 
   // Reset Strip
   const rouletteContainer = document.querySelector('.roulette-container');
