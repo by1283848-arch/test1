@@ -64,6 +64,7 @@ body {
 /* Layouts */
 .bento-header { grid-column: span 4; display: flex; justify-content: space-between; align-items: center; }
 .logo { font-weight: 700; font-size: 1.25rem; color: var(--accent); }
+.header-actions { display: flex; gap: 0.5rem; }
 
 .bento-main {
   grid-column: span 4;
@@ -76,6 +77,14 @@ body {
   gap: 2rem;
   background: linear-gradient(135deg, var(--card-bg) 0%, var(--accent-light) 200%);
   padding: 3rem;
+}
+
+/* Fullscreen Specific */
+:fullscreen .bento-main {
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  border: none;
 }
 
 .bento-range { grid-column: span 2; }
