@@ -96,7 +96,7 @@ spinBtn.addEventListener('click', () => {
   rouletteStrip.style.transform = 'translateX(0)';
   rouletteStrip.innerHTML = '';
   
-  const itemWidth = 100;
+  const itemWidth = 160;
   const totalItems = 60; // Numbers to show in the strip
   const winningIndex = totalItems - 10; // The winning number will be near the end
   const winningNumber = Math.floor(Math.random() * clampedMax) + 1;
@@ -119,9 +119,8 @@ spinBtn.addEventListener('click', () => {
     rouletteContainer.classList.add('spinning');
     rouletteStrip.style.transition = 'transform 4s cubic-bezier(0.15, 0, 0.15, 1)';
     // Center the item: offset so that item center is at container center
-    // Container center is at 0 (since strip starts at left: 50%)
-    // To center i-th item, its center (i*100 + 50) must be at 0.
-    const offset = -(winningIndex * itemWidth + 50);
+    // itemWidth = 160, center = 80
+    const offset = -(winningIndex * itemWidth + (itemWidth / 2));
     rouletteStrip.style.transform = `translateX(${offset}px)`;
   }, 50);
 
