@@ -245,14 +245,21 @@ body {
 
 .result-cover {
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 50%;
+  width: var(--roulette-item-width);
+  height: var(--roulette-item-height);
+  transform: translate(-50%, -50%);
   z-index: 11;
-  opacity: 0;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #2f3545, #202632);
+  border: 6px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.28);
   pointer-events: none;
 }
 
 [data-theme="dark"] .result-cover {
-  opacity: 0;
+  background: linear-gradient(180deg, #3a4358, #171b24);
 }
 
 .result-cover.reveal {
@@ -265,21 +272,8 @@ body {
 }
 
 @keyframes reveal-cover {
-  0% { opacity: 0; }
-  100% { opacity: 0; }
-}
-
-.roulette-container.awaiting-reveal .roulette-strip {
-  opacity: 0;
-}
-
-.roulette-strip.revealing {
-  animation: reveal-strip 0.28s ease-out;
-}
-
-@keyframes reveal-strip {
-  0% { opacity: 0; filter: blur(8px); }
-  100% { opacity: 1; filter: blur(0); }
+  0% { opacity: 1; }
+  100% { opacity: 1; }
 }
 
 .roulette-strip-wrapper {
@@ -295,7 +289,9 @@ body {
   align-items: center;
   position: absolute;
   left: 50%;
-  transition: transform 4s cubic-bezier(0.15, 0, 0.15, 1);
+  top: 50%;
+  transform: translate(0, -50%);
+  transition: transform 4s linear;
   will-change: transform;
 }
 
