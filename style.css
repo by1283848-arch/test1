@@ -10,6 +10,8 @@
   --border-color: #e5e7eb;
   --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --card-radius: 24px;
+  --roulette-item-width: 120px;
+  --roulette-item-height: 140px;
 }
 
 [data-theme="dark"] {
@@ -190,9 +192,9 @@ body {
 
 .roulette-container {
   position: relative;
-  width: 700px; /* 140px * 5 items */
+  width: calc(var(--roulette-item-width) * 5);
   max-width: 95%;
-  height: 140px;
+  height: var(--roulette-item-height);
   margin: 2.5rem auto;
   overflow: visible;
   background: rgba(0, 0, 0, 0.05);
@@ -211,8 +213,8 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 150px;
-  height: 150px;
+  width: var(--roulette-item-width);
+  height: var(--roulette-item-height);
   border: 6px solid var(--accent);
   border-radius: 20px;
   transform: translate(-50%, -50%);
@@ -249,9 +251,9 @@ body {
 }
 
 .roulette-item {
-  min-width: 140px;
-  width: 140px;
-  height: 140px;
+  min-width: var(--roulette-item-width);
+  width: var(--roulette-item-width);
+  height: var(--roulette-item-height);
   display: flex;
   justify-content: center;
   align-items: center;

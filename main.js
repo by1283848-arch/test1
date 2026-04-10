@@ -117,6 +117,7 @@ spinBtn.addEventListener('click', () => {
   rouletteStrip.innerHTML = '';
   
   const itemWidth = 120;
+  document.documentElement.style.setProperty('--roulette-item-width', `${itemWidth}px`);
   const totalItems = 60;
   const winningIndex = totalItems - 10;
   const winningNumber = Math.floor(Math.random() * clampedMax) + 1;
@@ -136,7 +137,15 @@ spinBtn.addEventListener('click', () => {
   setTimeout(() => {
     rouletteContainer.classList.add('spinning');
     rouletteStrip.style.transition = 'transform 4s cubic-bezier(0.15, 0, 0.15, 1)';
-    const offset = -(winningIndex * itemWidth + (itemWidth / 2));
+
+    const winner = document.getElementById('winner-item');
+    const marker = rouletteContainer.querySelector('.roulette-marker');
+    const markerRect = marker.getBoundingClientRect();
+    const winnerRect = winner.getBoundingClientRect();
+    const markerCenter = markerRect.left + (markerRect.width / 2);
+    const winnerCenter = winnerRect.left + (winnerRect.width / 2);
+    const offset = markerCenter - winnerCenter;
+
     rouletteStrip.style.transform = `translateX(${offset}px)`;
   }, 50);
 
