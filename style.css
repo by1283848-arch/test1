@@ -80,11 +80,45 @@ body {
 }
 
 /* Fullscreen Specific */
+:fullscreen .bento-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  background-color: var(--bg-color);
+}
+
+:fullscreen .card:not(.bento-main):not(.bento-header) {
+  display: none;
+}
+
+:fullscreen .bento-header {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: auto;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  z-index: 100;
+}
+
+:fullscreen .bento-header .logo {
+  display: none;
+}
+
 :fullscreen .bento-main {
   width: 100vw;
   height: 100vh;
   border-radius: 0;
   border: none;
+  padding: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bento-range { grid-column: span 2; }
