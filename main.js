@@ -2,6 +2,7 @@ const themeToggle = document.getElementById('theme-toggle');
 const spinBtn = document.getElementById('spin-btn');
 const maxNumberInput = document.getElementById('max-number');
 const rouletteStrip = document.getElementById('roulette-strip');
+const fullscreenBtn = document.getElementById('fullscreen-btn');
 
 // Theme Logic
 const currentTheme = localStorage.getItem('theme');
@@ -22,6 +23,28 @@ themeToggle.addEventListener('click', () => {
     themeToggle.innerHTML = '<i data-lucide="sun"></i>';
   }
   lucide.createIcons();
+});
+
+// Fullscreen Logic
+fullscreenBtn.addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {
+      console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+    });
+    fullscreenBtn.innerHTML = '<i data-lucide="minimize"></i>';
+  } else {
+    document.exitFullscreen();
+    fullscreenBtn.innerHTML = '<i data-lucide="maximize"></i>';
+  }
+  lucide.createIcons();
+});
+
+// Update icon on esc key
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement) {
+    fullscreenBtn.innerHTML = '<i data-lucide="maximize"></i>';
+    lucide.createIcons();
+  }
 });
 
 // Confetti Effect
