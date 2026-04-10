@@ -68,13 +68,14 @@ spinBtn.addEventListener('click', () => {
   spinBtn.disabled = true;
 
   // Reset Strip
+  const rouletteContainer = document.querySelector('.roulette-container');
   rouletteStrip.style.transition = 'none';
   rouletteStrip.style.transform = 'translateX(0)';
   rouletteStrip.innerHTML = '';
   
   const itemWidth = 100;
-  const totalItems = 50; // Numbers to show in the strip
-  const winningIndex = totalItems - 5; // The winning number will be near the end
+  const totalItems = 60; // Numbers to show in the strip
+  const winningIndex = totalItems - 10; // The winning number will be near the end
   const winningNumber = Math.floor(Math.random() * clampedMax) + 1;
 
   // Generate Items
@@ -92,14 +93,17 @@ spinBtn.addEventListener('click', () => {
 
   // Trigger Animation
   setTimeout(() => {
+    rouletteContainer.classList.add('spinning');
     rouletteStrip.style.transition = 'transform 4s cubic-bezier(0.15, 0, 0.15, 1)';
-    const offset = -(winningIndex * itemWidth);
+    // Center the item: offset so that item center is at container center
+    // Container center is at 0 (since strip starts at left: 50%)
+    // To center i-th item, its center (i*100 + 50) must be at 0.
+    const offset = -(winningIndex * itemWidth + 50);
     rouletteStrip.style.transform = `translateX(${offset}px)`;
-    rouletteStrip.classList.add('spinning');
   }, 50);
 
   setTimeout(() => {
-    rouletteStrip.classList.remove('spinning');
+    rouletteContainer.classList.remove('spinning');
     const winner = document.getElementById('winner-item');
     winner.classList.add('winner');
     winner.classList.add('win-animation');
