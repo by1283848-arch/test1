@@ -90,6 +90,56 @@ body {
 .accent-icon { width: 48px; height: 48px; color: var(--accent); }
 .feature-icon { width: 32px; height: 32px; color: var(--accent); margin-bottom: 0.5rem; }
 
+.title-edit-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.editable-title {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-main);
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 600px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.editable-title:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .editable-title:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.editable-title:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.edit-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--text-sub);
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.title-edit-wrapper:hover .edit-icon {
+  opacity: 1;
+}
+
 .roulette-container {
   position: relative;
   width: 500px; /* 100px * 5 items */
