@@ -93,10 +93,11 @@ body {
 .title-edit-wrapper {
   position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 1.5rem auto;
 }
 
 .editable-title {
@@ -107,9 +108,8 @@ body {
   font-size: 2.5rem;
   font-weight: 800;
   text-align: center;
-  padding: 0.5rem;
+  padding: 0.5rem 2.5rem; /* Space for absolute icon */
   width: 100%;
-  max-width: 600px;
   transition: all 0.3s ease;
   cursor: pointer;
 }
@@ -129,11 +129,14 @@ body {
 }
 
 .edit-icon {
+  position: absolute;
+  right: 0.5rem;
   width: 20px;
   height: 20px;
   color: var(--text-sub);
   opacity: 0.5;
   transition: opacity 0.3s;
+  pointer-events: none;
 }
 
 .title-edit-wrapper:hover .edit-icon {
