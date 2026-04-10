@@ -4,6 +4,7 @@ const maxNumberInput = document.getElementById('max-number');
 const rouletteStrip = document.getElementById('roulette-strip');
 const fullscreenBtn = document.getElementById('fullscreen-btn');
 const soundToggle = document.getElementById('sound-toggle');
+const revealBtn = document.getElementById('reveal-btn');
 
 // Sound setup
 const spinSound = new Audio('sound/Triple_Seven_Strike.mp3');
@@ -101,7 +102,32 @@ function createConfetti() {
 }
 
 // Roulette Logic
+const spinDuration = 6500;
 let isSpinning = false;
+let pendingWinner = null;
+
+function resetRevealState() {
+  pendingWinner = null;
+  revealBtn.hidden = true;
+  revealBtn.disabled = true;
+}
+
+function revealWinner() {
+  if (!pendingWinner) return;
+
+  pendingWinner.classList.add('winner');
+  pendingWinner.classList.add('win-animation');
+  document.querySelector('.bento-main').classList.add('confetti-glow');
+  createConfetti();
+  resetRevealState();
+  spinBtn.disabled = false;
+
+  setTimeout(() => {
+    document.querySelector('.bento-main').classList.remove('confetti-glow');
+  }, 2000);
+}
+
+revealBtn.addEventListener('click', revealWinner);
 
 spinBtn.addEventListener('click', () => {
   if (isSpinning) return;
@@ -110,6 +136,7 @@ spinBtn.addEventListener('click', () => {
   maxNumberInput.value = clampedMax;
   isSpinning = true;
   spinBtn.disabled = true;
+  resetRevealState();
 
   const rouletteContainer = document.querySelector('.roulette-container');
   rouletteStrip.style.transition = 'none';
@@ -136,7 +163,7 @@ spinBtn.addEventListener('click', () => {
 
   setTimeout(() => {
     rouletteContainer.classList.add('spinning');
-    rouletteStrip.style.transition = 'transform 4s cubic-bezier(0.15, 0, 0.15, 1)';
+    rouletteStrip.style.transition = `transform ${spinDuration / 1000}s cubic-bezier(0.15, 0, 0.15, 1)`;
 
     const winner = document.getElementById('winner-item');
     const marker = rouletteContainer.querySelector('.roulette-marker');
@@ -151,15 +178,9 @@ spinBtn.addEventListener('click', () => {
 
   setTimeout(() => {
     rouletteContainer.classList.remove('spinning');
-    const winner = document.getElementById('winner-item');
-    winner.classList.add('winner');
-    winner.classList.add('win-animation');
-    document.querySelector('.bento-main').classList.add('confetti-glow');
-    createConfetti();
-    setTimeout(() => {
-      isSpinning = false;
-      spinBtn.disabled = false;
-      document.querySelector('.bento-main').classList.remove('confetti-glow');
-    }, 2000);
-  }, 4100);
+    pendingWinner = document.getElementById('winner-item');
+    revealBtn.hidden = false;
+    revealBtn.disabled = false;
+    isSpinning = false;
+  }, spinDuration + 100);
 });
