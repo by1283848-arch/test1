@@ -44,6 +44,7 @@ const currentTheme = localStorage.getItem('theme');
 if (currentTheme) {
   document.documentElement.setAttribute('data-theme', currentTheme);
   themeToggle.innerHTML = currentTheme === 'dark' ? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>';
+  lucide.createIcons();
 }
 
 themeToggle.addEventListener('click', () => {
